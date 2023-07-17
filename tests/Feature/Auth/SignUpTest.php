@@ -16,7 +16,7 @@ class SignUpTest extends TestCase
     public function user_can_be_created(): void
     {
         $response = $this->post('/api/v1/auth/signup', $this->data());
-
+		
         $response->assertStatus(200);
 	
 	    $response->assertJson(function (AssertableJson $json) {
