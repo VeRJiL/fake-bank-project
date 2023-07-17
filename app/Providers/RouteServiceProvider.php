@@ -38,10 +38,13 @@ class RouteServiceProvider extends ServiceProvider
 	
 	private function loadApiRoutes(): void
 	{
-		Route::prefix("api/v1")->group(function() {
-			Route::middleware('api')
-				->prefix("/auth")
+		Route::middleware("api")->prefix("api/v1")->group(function() {
+			Route::prefix("/auth")
 				->group(base_path('routes/api/v1/auth.php'));
+			
+			Route::prefix("/bank-accounts")
+				->middleware("auth:sanctum")
+				->group(base_path('routes/api/v1/bank-account.php'));
 		});
 	}
 }
