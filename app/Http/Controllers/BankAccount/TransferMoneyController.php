@@ -28,7 +28,7 @@ class TransferMoneyController extends Controller
 				return response()->json([
 					"data" => $sender,
 					"message" => sprintf("Not Enough Balance! your current balance is: %s", $sender->balance)
-				]);
+				], 406);
 			}
 			
 			$this->transferMoneyService->execute($sender, $receiver, $request->amount);
@@ -49,7 +49,7 @@ class TransferMoneyController extends Controller
 		// 	return response()->json([
 		// 		"data" => null,
 		// 		"message" => $exception->getMessage()
-		// 	]);
+		// 	], 406);
 		// }
     }
 }

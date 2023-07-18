@@ -15,6 +15,8 @@ abstract class TestCase extends BaseTestCase
 		$response = $this->post("/api/v1/auth/signup", $this->signUpData());
 		
 		$this->loggedInUser = json_decode($response->getContent())->data;
+		
+		$this->withHeader("Authorization", "Bearer {$this->loggedInUser->token}");
 	}
 	
 	protected function signUpData(): array
