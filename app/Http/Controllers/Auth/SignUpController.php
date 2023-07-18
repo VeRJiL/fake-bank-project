@@ -2,27 +2,26 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\SignUpRequest;
-use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+use App\Http\Requests\Auth\SignUpRequest;
 
 class SignUpController extends Controller
 {
 	public function execute(SignUpRequest $request): JsonResponse
 	{
-		$user = User::firstOrCreate(
-			['national_code' => $request->national_code],
-			$request->allowedInputs()
-		);
+		$user = User::where('national_code', $request->national_code)->first();
 		
-		if (!$user) {
+		if ($user) {
 			return response()->json([
 				'data' => null,
-				'message' => "Something Went Wrong! Please try again."
-			]);
+				'message' => 'This Account Exist! Try "forget password button" if you dont remember your credentials'
+			], 406);
 		}
+		
+		$user = User::create($request->allowedInputs());
 		
 		$user->token = $user->createToken(implode(', ', $request->device_name))->plainTextToken;
 		

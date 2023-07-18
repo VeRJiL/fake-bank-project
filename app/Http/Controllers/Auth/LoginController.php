@@ -18,7 +18,7 @@ class LoginController extends Controller
 			return response()->json([
 				'data' => null,
 				'msg' => 'Wrong Credentials!',
-			], 401);
+			], 406);
 		}
 		
 		$user->token = $user->createToken(implode(', ', $request->device_name))->plainTextToken;

@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Auth;
 
-use App\Helpers\TableNames;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
+use App\Helpers\TableNames;
+use Illuminate\Testing\Fluent\AssertableJson;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SignUpTest extends TestCase
 {
@@ -29,6 +28,16 @@ class SignUpTest extends TestCase
 			'national_code' => $this->data()['national_code']
 		]);
     }
+	
+	/** @test */
+	public function user_can_not_register_with_same_national_code()
+	{
+		$this->post('/api/v1/auth/signup', $this->data());
+		
+		$response = $this->post('/api/v1/auth/signup', $this->data());
+		
+		$response->assertStatus(406);
+	}
 	
 	private function data(): array
 	{
