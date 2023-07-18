@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\MoneyTransferred;
+use App\Listeners\SendConfirmationEmailWithTransactionDetail;
+use App\Listeners\SendConfirmationSMSWithTransactionDetail;
+use App\Models\BankAccount;
+use App\Observers\BankAccountObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +23,11 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+	    
+	    MoneyTransferred::class => [
+			SendConfirmationSMSWithTransactionDetail::class,
+		    SendConfirmationEmailWithTransactionDetail::class
+	    ]
     ];
 
     /**
@@ -25,7 +35,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        BankAccount::observe(BankAccountObserver::class);
     }
 
     /**

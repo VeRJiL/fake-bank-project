@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\Currency;
 use App\Helpers\TableNames;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,14 +12,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(TableNames::bankAccounts, function (Blueprint $table) {
+        Schema::create(TableNames::transactions, function (Blueprint $table) {
             $table->id();
 			
-			$table->uuid();
-			$table->string("name");
-			$table->text("description")->nullable();
-			$table->unsignedBigInteger("balance");
-			$table->enum("currency", Currency::values());
+			$table->foreignId("sender_id")
+				->references("id")
+				->on(TableNames::bankAccounts);
+	
+	        $table->foreignId("receiver_id")
+		        ->references("id")
+		        ->on(TableNames::bankAccounts);
+			
+			$table->unsignedBigInteger("amount");
 			
             $table->timestamps();
         });
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(TableNames::bankAccounts);
+        Schema::dropIfExists(TableNames::transactions);
     }
 };

@@ -3,15 +3,18 @@
 namespace Tests\Feature\Auth;
 
 use App\Helpers\TableNames;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
+	use RefreshDatabase;
+	
 	protected function setUp(): void
 	{
 		parent::setUp();
 		
-		$this->post("/api/v1/auth/signup", $this->signUpData());
+		$this->createLoggedInUser();
 	}
 	
 	/** @test */
@@ -21,7 +24,7 @@ class LoginTest extends TestCase
 
         $response->assertStatus(200);
 		
-		$this->assertDatabaseCount(TableNames::personalToken, 2);
+		$this->assertDatabaseCount(TableNames::personalTokens, 2);
     }
 	
 	private function loginData(): array
@@ -30,20 +33,6 @@ class LoginTest extends TestCase
 			'username' => $this->signUpData()['national_code'],
 			'password' => $this->signUpData()['password'],
 			'device_name' => $this->signUpData()['device_name'],
-		];
-	}
-	
-	private function signUpData(): array
-	{
-		return [
-			"first_name" => "Arash",
-			"last_name" => "Nikbakht",
-			"phone_number" => "+905368499136",
-			"national_code" => "1234567890",
-			"email" => "arash.nykbakht@gmail.com",
-			"email_verified_at" => now(),
-			"password" => "arash1234",
-			"device_name" => ["windows", "chrome", "browser"]
 		];
 	}
 }

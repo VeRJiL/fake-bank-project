@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(TableNames::personalToken, function (Blueprint $table) {
+        Schema::create(TableNames::personalTokens, function (Blueprint $table) {
             $table->id();
             $table->morphs('tokenable');
             $table->string('name');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(TableNames::personalToken);
+        Schema::dropIfExists(TableNames::personalTokens);
     }
 };

@@ -23,9 +23,9 @@ class SignUpTest extends TestCase
 		    $json->has('data');
 	    });
 		
-		$this->assertDatabaseCount(TableNames::user, 1);
+		$this->assertDatabaseCount(TableNames::users, 1);
 		
-		$this->assertDatabaseHas(TableNames::user, [
+		$this->assertDatabaseHas(TableNames::users, [
 			'national_code' => $this->data()['national_code']
 		]);
     }

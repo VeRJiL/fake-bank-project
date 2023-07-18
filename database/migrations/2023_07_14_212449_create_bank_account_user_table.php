@@ -17,7 +17,7 @@ return new class extends Migration
 	
 	        $table->foreignId("user_id")
 		        ->references("id")
-		        ->on(TableNames::user)
+		        ->on(TableNames::users)
 		        ->restrictOnDelete();
 	
 	        $table->foreignId("bank_account_id")

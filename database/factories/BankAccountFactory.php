@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\BankAccount;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BankAccount>
+ * @extends Factory<BankAccount>
  */
 class BankAccountFactory extends Factory
 {
@@ -19,7 +20,7 @@ class BankAccountFactory extends Factory
         return [
             "name" => fake()->sentences(3, true),
 	        "description" => fake()->sentences(20, true),
-	        "balance" => random_int(1000, 1000000),
+	        "balance" => 20000,
         ];
     }
 }

@@ -13,8 +13,13 @@ class BankAccount extends Model
 	
 	protected $guarded = [];
 	
-	public function users(): BelongsToMany
+	public function owners(): BelongsToMany
 	{
 		return $this->belongsToMany(User::class, TableNames::bankAccountOwners);
+	}
+	
+	public function transactions()
+	{
+		return $this->hasMany(Transaction::class);
 	}
 }
