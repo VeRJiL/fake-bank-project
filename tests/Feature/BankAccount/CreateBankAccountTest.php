@@ -2,10 +2,9 @@
 
 namespace Tests\Feature\BankAccount;
 
+use Tests\TestCase;
 use App\Enums\Currency;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 
 class CreateBankAccountTest extends TestCase
 {
