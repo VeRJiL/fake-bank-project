@@ -15,8 +15,8 @@ class TransactionCollection extends ResourceCollection
         return $this->collection->transform(function (Transaction $transaction) {
 			return [
 				"id" => $transaction->id,
-				"sender" => $transaction->sender->uuid,
-				"receiver" => $transaction->receiver->uuid,
+				"sender" => new BankAccountResource($transaction->sender),
+				"receiver" => new BankAccountResource($transaction->receiver),
 				"amount" => $transaction->amount,
 			];
         });

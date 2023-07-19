@@ -1,0 +1,392 @@
+{
+	"info": {
+		"_postman_id": "408b9d90-651c-4d3a-9300-6ab09761c79a",
+		"name": "Fake Bank Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5316696"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseData = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"fakeBankToken\", responseData.data.token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "first_name",
+									"value": "John",
+									"type": "text"
+								},
+								{
+									"key": "last_name",
+									"value": "Doe",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "johndoe@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "national_code",
+									"value": "1234567880",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "09141231122",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin1234",
+									"type": "text"
+								},
+								{
+									"key": "device_name[]",
+									"value": "windows",
+									"type": "text"
+								},
+								{
+									"key": "device_name[]",
+									"value": "chrome",
+									"type": "text"
+								},
+								{
+									"key": "device_name[]",
+									"value": "browser",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{fakeBankUrl}}/api/v1/auth/signup",
+							"host": [
+								"{{fakeBankUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseData = pm.response.json();\r",
+									"\r",
+									"console.log(responseData.data.token)\r",
+									"\r",
+									"pm.globals.set(\"fakeBankToken\", responseData.data.token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "1234567890",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin1234",
+									"type": "text"
+								},
+								{
+									"key": "device_name[]",
+									"value": "windows",
+									"type": "text"
+								},
+								{
+									"key": "device_name[]",
+									"value": "firefox",
+									"type": "text"
+								},
+								{
+									"key": "device_name[]",
+									"value": "browser",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{fakeBankUrl}}/api/v1/auth/login",
+							"host": [
+								"{{fakeBankUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bank Account",
+			"item": [
+				{
+					"name": "Create Bank Account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fakeBankToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "only for shopping",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "this account is only for shopping day to day requirements",
+									"type": "text"
+								},
+								{
+									"key": "balance",
+									"value": "2000",
+									"type": "text"
+								},
+								{
+									"key": "currency",
+									"value": "dollar",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{fakeBankUrl}}/api/v1/bank-accounts/store",
+							"host": [
+								"{{fakeBankUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bank-accounts",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive Detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(pm.globals.get(\"fakeBankToken\"))\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fakeBankToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "only for shopping",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "this account is only for shopping day to day requirements",
+									"type": "text"
+								},
+								{
+									"key": "balance",
+									"value": "2000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{fakeBankUrl}}/api/v1/bank-accounts/1",
+							"host": [
+								"{{fakeBankUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bank-accounts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive Transactions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{fakeBankToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "only for shopping",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "this account is only for shopping day to day requirements",
+									"type": "text"
+								},
+								{
+									"key": "balance",
+									"value": "2000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{fakeBankUrl}}/api/v1/bank-accounts/1/transactions",
+							"host": [
+								"{{fakeBankUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"bank-accounts",
+								"1",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

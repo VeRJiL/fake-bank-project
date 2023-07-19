@@ -18,8 +18,8 @@ class BankAccountFactory extends Factory
     public function definition(): array
     {
         return [
-            "name" => fake()->sentences(3, true),
-	        "description" => fake()->sentences(20, true),
+            "name" => fake()->words(3, true),
+	        "description" => fake()->words(20, true),
 	        "balance" => 20000,
         ];
     }
