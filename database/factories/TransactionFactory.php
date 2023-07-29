@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Domain\Transaction\Models\Transaction;
 
 /**
  * @extends Factory<Transaction>

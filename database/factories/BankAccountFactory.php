@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\BankAccount;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Domain\BankAccount\Models\BankAccount;
 
 /**
  * @extends Factory<BankAccount>

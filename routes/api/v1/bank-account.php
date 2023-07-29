@@ -1,10 +1,10 @@
 <?php
 
+use Api\BankAccount\CreateBankAccountController;
+use Api\BankAccount\GetBankAccountDetailController;
+use Api\BankAccount\GetBankAccountTransactionsController;
+use Api\BankAccount\TransferMoneyController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BankAccount\TransferMoneyController;
-use App\Http\Controllers\BankAccount\CreateBankAccountController;
-use App\Http\Controllers\BankAccount\GetBankAccountDetailController;
-use App\Http\Controllers\BankAccount\GetBankAccountTransactionsController;
 
 Route::post("/store", [CreateBankAccountController::class, "execute"]);
 Route::post("/transfer", [TransferMoneyController::class, "execute"]);

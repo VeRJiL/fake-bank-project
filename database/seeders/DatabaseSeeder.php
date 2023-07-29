@@ -3,11 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\BankAccount;
-use App\Models\Transaction;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Domain\BankAccount\Models\BankAccount;
+use Domain\Transaction\Models\Transaction;
+use Domain\User\Models\User;
 
 class DatabaseSeeder extends Seeder
 {

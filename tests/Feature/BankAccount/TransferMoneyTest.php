@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\BankAccount;
 
-use Tests\TestCase;
-use App\Models\User;
-use App\Models\BankAccount;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Domain\BankAccount\Models\BankAccount;
+use Domain\Transaction\Models\Transaction;
+use Tests\TestCase;
 
 class TransferMoneyTest extends TestCase
 {

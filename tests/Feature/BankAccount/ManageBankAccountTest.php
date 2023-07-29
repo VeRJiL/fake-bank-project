@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\BankAccount;
 
-use Tests\TestCase;
-use App\Models\User;
-use App\Models\Transaction;
-use App\Models\BankAccount;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Domain\BankAccount\Domain\BankAccount\Models\BankAccount;
+use Domain\Transaction\Domain\Transaction\Models\Transaction;
+use Domain\User\Domain\User\Models\User;
+use Tests\TestCase;
 
 class ManageBankAccountTest extends TestCase
 {

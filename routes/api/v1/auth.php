@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\SignUpController;
+use Api\Auth\LoginController;
+use Api\Auth\SignUpController;
 use Illuminate\Support\Facades\Route;
 
 Route::post("/signup", [SignUpController::class, "execute"]);

@@ -1,0 +1,23 @@
+<?php
+
+namespace Helpers\Contracts;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
+interface RepositoryInterface
+{
+    public function find(int $entityId, $attributes = ['*']): Model|Collection|Builder|array|null;
+
+    public function getAll($attributes = ['*']): Collection|array;
+
+    public function getPaginated(int $perPage = null): LengthAwarePaginator;
+
+    public function store(DTOInterface $dto): Model;
+
+    public function update(DTOInterface $dto, Model $entity): Model;
+
+    public function destroy(Model $entity): ?bool;
+}
